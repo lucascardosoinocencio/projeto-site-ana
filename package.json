@@ -1,0 +1,17 @@
+{
+  "name": "projeto-site-ana",
+  "version": "1.0.0",
+  "description": "Landing page da Ana Julia — Massoterapia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "optimize-images": "node scripts/optimize-images.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "sharp": "^0.35.3"
+  }
+}
