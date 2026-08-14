@@ -189,13 +189,20 @@
     text-align:left;
   }
   .dep-img-wrap{
+    position:relative;
     width:100%; height:380px;
     display:flex; align-items:center; justify-content:center;
     background:var(--cream-2);
     border-radius:6px;
     overflow:hidden;
   }
-  .dep-img-wrap img{max-width:100%; max-height:100%; object-fit:contain;}
+  .dep-img-wrap .dep-img-bg{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; filter:blur(28px) brightness(0.82) saturate(1.15);
+    transform:scale(1.2);
+  }
+  .dep-img-wrap picture{position:relative; z-index:1; display:flex; max-width:100%; max-height:100%;}
+  .dep-img-wrap img{position:relative; z-index:1; max-width:100%; max-height:100%; object-fit:contain;}
   .resultados .dep-img-wrap img{transition:transform 0.5s ease;}
   .resultados .dep-card:hover .dep-img-wrap img,
   .resultados .dep-card:focus-within .dep-img-wrap img{transform:scale(1.08);}
@@ -214,6 +221,43 @@
     border-radius:50%; cursor:pointer; transition:background-color 0.3s;
   }
   .dep-dot.active{background-color:var(--bronze);}
+
+  /* DEPOIMENTOS EM VÍDEO */
+  .video-dep{background:var(--cream); text-align:center;}
+  .video-dep-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr);
+    gap:clamp(16px, 2.5vw, 32px);
+    max-width:1200px; margin:0 auto;
+  }
+  .video-dep-card{margin:0; text-align:left;}
+  .video-dep-frame{position:relative; border-radius:10px; overflow:hidden; background:var(--forest);}
+  .video-dep-card video{
+    width:100%; aspect-ratio:9/16; object-fit:cover;
+    display:block;
+  }
+  .video-play-btn{
+    position:absolute; inset:0; width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(35,43,30,0.18);
+    border:none; padding:0; cursor:pointer;
+    transition:background 0.25s ease;
+  }
+  .video-play-btn .circle{
+    width:64px; height:64px; border-radius:50%;
+    background:var(--bronze);
+    display:flex; align-items:center; justify-content:center;
+    transition:transform 0.25s ease, background 0.25s ease;
+    box-shadow:0 8px 24px rgba(35,43,30,0.35);
+  }
+  .video-play-btn svg{width:22px; height:22px; fill:var(--forest); margin-left:3px;}
+  .video-play-btn:hover .circle, .video-play-btn:focus-visible .circle{background:var(--bronze-light); transform:scale(1.08);}
+  .video-dep-frame.is-playing .video-play-btn{display:none;}
+  .video-dep-card figcaption{
+    margin-top:14px; font-size:0.86rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft);
+  }
+  @media (max-width:820px){
+    .video-dep-grid{grid-template-columns:1fr; max-width:420px;}
+  }
 
   /* FAQ */
   .faq{background:var(--cream); max-width:820px; margin:0 auto;}
@@ -365,6 +409,7 @@
   .card-tec-img img{width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s ease;}
   .card-tec-img--contain{background:var(--cream-2);}
   .card-tec-img--contain img{object-fit:contain;}
+  .card-tec-img--pos-bottom img{object-position:center 88%;}
   .card-tec:hover .card-tec-img img{transform:scale(1.04);}
   .card-tec-body{padding:32px;}
   .card-tec .num{font-family:'Fraunces',serif; font-style:italic; color:var(--sage); font-size:0.95rem; margin-bottom:18px; display:block;}
@@ -415,6 +460,48 @@
     position:absolute; top:0; left:0; height:100%; width:25%;
     background:var(--bronze-light); border-radius:2px;
     transition:width 0.1s linear;
+  }
+
+  /* foto real da sala — o neon em zigzag na parede é o mesmo motivo
+     "tensão -> alívio" da linha-assinatura do site, então em vez de desenhar
+     um traço sintético, a própria sala carrega esse significado */
+  .atendimento-visual{
+    display:none;
+    position:absolute; top:0; right:0; height:100%;
+    width:min(44%, 620px);
+    overflow:hidden;
+    z-index:0;
+  }
+  .atendimento-visual::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(90deg, var(--forest) 0%, rgba(35,43,30,0.6) 14%, rgba(35,43,30,0) 46%),
+               linear-gradient(0deg, rgba(35,43,30,0.45) 0%, transparent 32%);
+  }
+  .atendimento-visual picture{display:block; width:100%; height:100%;}
+  .atendimento-visual .av-img{
+    position:absolute; inset:0;
+    opacity:0;
+    transition:opacity 1s ease;
+  }
+  .atendimento-visual .av-img.is-active{opacity:1;}
+  .atendimento-visual img{
+    display:block; width:100%; height:100%;
+    object-fit:cover; object-position:32% 38%;
+    filter:sepia(0.25) hue-rotate(50deg) saturate(0.75) brightness(0.7) contrast(1.08);
+    transform:scale(1.1);
+  }
+  /* fotos com pele (mãos, pele) ficam esverdeadas com o hue-rotate acima —
+     tratamento mais neutro que escurece sem distorcer o tom de pele */
+  .atendimento-visual .av-img--skin img{
+    filter:grayscale(0.3) brightness(0.72) contrast(1.12) saturate(0.85);
+  }
+  @media (min-width:1100px){
+    .atendimento-visual{display:block;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .atendimento-visual img{transform:none;}
+    .atendimento-visual .av-img{transition:opacity 0.3s ease;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -488,6 +575,7 @@
     <a href="#tecnicas">Técnicas</a>
     <a href="#atendimento">Atendimento</a>
     <a href="#resultados">Resultados</a>
+    <a href="#video-dep">Depoimentos</a>
     <a href="#faq">Dúvidas</a>
     <a href="#contato">Contato</a>
   </div>
@@ -561,14 +649,14 @@
     <div class="card-tec">
       <div class="card-tec-img"><picture>
         <source type="image/webp" srcset="assets-otimizadas/mobile/drenagem-facial.webp 480w, assets-otimizadas/tablet/drenagem-facial.webp 1024w" sizes="(max-width:820px) 100vw, 33vw">
-        <img src="assets-otimizadas/tablet/drenagem-facial.jpg" srcset="assets-otimizadas/mobile/drenagem-facial.jpg 480w, assets-otimizadas/tablet/drenagem-facial.jpg 1024w" sizes="(max-width:820px) 100vw, 33vw" alt="Sessão de drenagem linfática para lipedema" loading="lazy" decoding="async">
+        <img src="assets-otimizadas/tablet/drenagem-facial.jpg" srcset="assets-otimizadas/mobile/drenagem-facial.jpg 480w, assets-otimizadas/tablet/drenagem-facial.jpg 1024w" sizes="(max-width:820px) 100vw, 33vw" alt="Sessão de drenagem facial" loading="lazy" decoding="async">
       </picture></div>
-      <div class="card-tec-body"><span class="num">05</span><h3>Drenagem linfática · lipedema</h3><p>Tratamento conservador clínico para lipedema.</p></div>
+      <div class="card-tec-body"><span class="num">05</span><h3>Drenagem facial</h3><p>Técnica que estimula a circulação e desincha o rosto, deixando os traços mais leves.</p></div>
     </div>
     <div class="card-tec">
       <div class="card-tec-img"><picture>
-        <source type="image/webp" srcset="assets-otimizadas/mobile/reflexologia-podal-2.webp 480w, assets-otimizadas/tablet/reflexologia-podal-2.webp 1024w" sizes="(max-width:820px) 100vw, 33vw">
-        <img src="assets-otimizadas/tablet/reflexologia-podal-2.jpg" srcset="assets-otimizadas/mobile/reflexologia-podal-2.jpg 480w, assets-otimizadas/tablet/reflexologia-podal-2.jpg 1024w" sizes="(max-width:820px) 100vw, 33vw" alt="Sessão de reflexologia podal" loading="lazy" decoding="async">
+        <source type="image/webp" srcset="assets-otimizadas/mobile/reflexologia-podal.webp 480w, assets-otimizadas/tablet/reflexologia-podal.webp 1024w" sizes="(max-width:820px) 100vw, 33vw">
+        <img src="assets-otimizadas/tablet/reflexologia-podal.jpg" srcset="assets-otimizadas/mobile/reflexologia-podal.jpg 480w, assets-otimizadas/tablet/reflexologia-podal.jpg 1024w" sizes="(max-width:820px) 100vw, 33vw" alt="Sessão de reflexologia podal" loading="lazy" decoding="async">
       </picture></div>
       <div class="card-tec-body"><span class="num">06</span><h3>Reflexologia podal</h3><p>Estímulo de pontos específicos nos pés, conectados a diferentes sistemas do corpo.</p></div>
     </div>
@@ -593,12 +681,47 @@
       </picture></div>
       <div class="card-tec-body"><span class="num">09</span><h3>Radiestesia</h3><p>Leitura energética como apoio complementar ao processo terapêutico.</p></div>
     </div>
+    <div class="card-tec">
+      <div class="card-tec-img"><picture>
+        <source type="image/webp" srcset="assets-otimizadas/mobile/auriculoterapia.webp 480w, assets-otimizadas/tablet/auriculoterapia.webp 1024w" sizes="(max-width:820px) 100vw, 33vw">
+        <img src="assets-otimizadas/tablet/auriculoterapia.jpg" srcset="assets-otimizadas/mobile/auriculoterapia.jpg 480w, assets-otimizadas/tablet/auriculoterapia.jpg 1024w" sizes="(max-width:820px) 100vw, 33vw" alt="Sessão de auriculoterapia" loading="lazy" decoding="async">
+      </picture></div>
+      <div class="card-tec-body"><span class="num">10</span><h3>Auriculoterapia</h3><p>Estímulo de pontos específicos na orelha, ligados ao sistema nervoso, para reduzir ansiedade e melhorar o sono.</p></div>
+    </div>
+    <div class="card-tec">
+      <div class="card-tec-img card-tec-img--pos-bottom"><picture>
+        <source type="image/webp" srcset="assets-otimizadas/mobile/ventosa-terapia.webp 480w, assets-otimizadas/tablet/ventosa-terapia.webp 1024w" sizes="(max-width:820px) 100vw, 33vw">
+        <img src="assets-otimizadas/tablet/ventosa-terapia.jpg" srcset="assets-otimizadas/mobile/ventosa-terapia.jpg 480w, assets-otimizadas/tablet/ventosa-terapia.jpg 1024w" sizes="(max-width:820px) 100vw, 33vw" alt="Sessão de ventosaterapia" loading="lazy" decoding="async">
+      </picture></div>
+      <div class="card-tec-body"><span class="num">11</span><h3>Ventosaterapia</h3><p>Sucção localizada que aumenta o fluxo sanguíneo na região e ajuda a soltar músculos mais tensos.</p></div>
+    </div>
+    <div class="card-tec">
+      <div class="card-tec-img"><picture>
+        <source type="image/webp" srcset="assets-otimizadas/mobile/escalda-pes.webp 480w, assets-otimizadas/tablet/escalda-pes.webp 1024w" sizes="(max-width:820px) 100vw, 33vw">
+        <img src="assets-otimizadas/tablet/escalda-pes.jpg" srcset="assets-otimizadas/mobile/escalda-pes.jpg 480w, assets-otimizadas/tablet/escalda-pes.jpg 1024w" sizes="(max-width:820px) 100vw, 33vw" alt="Escalda-pés de boas-vindas antes da sessão" loading="lazy" decoding="async">
+      </picture></div>
+      <div class="card-tec-body"><span class="num">12</span><h3>Escalda-pés</h3><p>Água morna e ervas relaxantes preparam o corpo antes mesmo da massagem começar.</p></div>
+    </div>
   </div>
 </section>
 
 <div class="atendimento-wrap" id="atendimento">
   <div class="atendimento-spacer">
     <div class="atendimento-pin">
+      <div class="atendimento-visual" aria-hidden="true">
+        <picture class="av-img is-active" data-steps="0,1">
+          <source type="image/webp" srcset="assets-otimizadas/mobile/sala-atendimento.webp 480w, assets-otimizadas/tablet/sala-atendimento.webp 1024w" sizes="46vw">
+          <img src="assets-otimizadas/tablet/sala-atendimento.jpg" srcset="assets-otimizadas/mobile/sala-atendimento.jpg 480w, assets-otimizadas/tablet/sala-atendimento.jpg 1024w" sizes="46vw" alt="" loading="lazy" decoding="async">
+        </picture>
+        <picture class="av-img av-img--skin" data-steps="2">
+          <source type="image/webp" srcset="assets-otimizadas/mobile/oleo-essencial.webp 480w, assets-otimizadas/tablet/oleo-essencial.webp 1024w" sizes="46vw">
+          <img src="assets-otimizadas/tablet/oleo-essencial.jpg" srcset="assets-otimizadas/mobile/oleo-essencial.jpg 480w, assets-otimizadas/tablet/oleo-essencial.jpg 1024w" sizes="46vw" alt="" loading="lazy" decoding="async">
+        </picture>
+        <picture class="av-img" data-steps="3">
+          <source type="image/webp" srcset="assets-otimizadas/mobile/ambiente-4.webp 480w, assets-otimizadas/tablet/ambiente-4.webp 1024w" sizes="46vw">
+          <img src="assets-otimizadas/tablet/ambiente-4.jpg" srcset="assets-otimizadas/mobile/ambiente-4.jpg 480w, assets-otimizadas/tablet/ambiente-4.jpg 1024w" sizes="46vw" alt="" loading="lazy" decoding="async">
+        </picture>
+      </div>
       <h2 class="atendimento-eyebrow">Como funciona o atendimento</h2>
       <div class="atendimento-step" data-step="1">
         <span class="step-num">Chegada</span>
@@ -691,6 +814,49 @@
     </div>
   </div>
   <div class="dep-nav" id="resNav"></div>
+</section>
+
+<section class="video-dep" id="video-dep">
+  <div class="depoimentos-head">
+    <div class="eyebrow">Depoimentos em vídeo</div>
+    <h2>Na voz de quem viveu</h2>
+    <p>Relatos gravados por clientes, sem edição.</p>
+  </div>
+  <div class="video-dep-grid">
+    <figure class="video-dep-card">
+      <div class="video-dep-frame">
+        <video playsinline preload="none" poster="assets-otimizadas/tablet/depoimento-video-1-poster.jpg">
+          <source src="assets-otimizadas/videos/depoimento-video-1.mp4" type="video/mp4">
+        </video>
+        <button class="video-play-btn" type="button" aria-label="Reproduzir depoimento em vídeo">
+          <span class="circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+      </div>
+      <figcaption>Relato espontâneo, gravado na sala de atendimento</figcaption>
+    </figure>
+    <figure class="video-dep-card">
+      <div class="video-dep-frame">
+        <video playsinline preload="none" poster="assets-otimizadas/tablet/depoimento-video-2-poster.jpg">
+          <source src="assets-otimizadas/videos/depoimento-video-2.mp4" type="video/mp4">
+        </video>
+        <button class="video-play-btn" type="button" aria-label="Reproduzir depoimento em vídeo">
+          <span class="circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+      </div>
+      <figcaption>Cliente conta como foi a experiência</figcaption>
+    </figure>
+    <figure class="video-dep-card">
+      <div class="video-dep-frame">
+        <video playsinline preload="none" poster="assets-otimizadas/tablet/depoimento-video-3-poster.jpg">
+          <source src="assets-otimizadas/videos/depoimento-video-3.mp4" type="video/mp4">
+        </video>
+        <button class="video-play-btn" type="button" aria-label="Reproduzir depoimento em vídeo">
+          <span class="circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+      </div>
+      <figcaption>Impressões logo após a sessão</figcaption>
+    </figure>
+  </div>
 </section>
 
 <section class="galeria" id="galeria">
@@ -975,6 +1141,7 @@ if (!prefersReducedMotion) {
   const steps = gsap.utils.toArray(".atendimento-step");
   const progressFill = document.getElementById("atendimentoProgressFill");
   const progressCount = document.getElementById("atendimentoProgressCount");
+  const avImgs = gsap.utils.toArray(".atendimento-visual .av-img");
   const pad2 = (n) => String(n).padStart(2, "0");
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -987,6 +1154,10 @@ if (!prefersReducedMotion) {
         const stepIndex = Math.min(steps.length - 1, Math.floor(self.progress * steps.length));
         progressCount.textContent = `${pad2(stepIndex + 1)} — ${pad2(steps.length)}`;
         progressFill.style.width = `${((stepIndex + 1) / steps.length) * 100}%`;
+        avImgs.forEach((pic) => {
+          const matches = pic.dataset.steps.split(",").map(Number).includes(stepIndex);
+          pic.classList.toggle("is-active", matches);
+        });
       }
     }
   });
@@ -995,6 +1166,10 @@ if (!prefersReducedMotion) {
       .to(step, { opacity: 1, duration: 1 })
       .to(step, { opacity: 0, duration: 0.5 });
   });
+  const avImgTargets = document.querySelectorAll(".atendimento-visual img");
+  if (avImgTargets.length) {
+    tl.fromTo(avImgTargets, { scale: 1.1 }, { scale: 1, ease: "none", duration: tl.duration() }, 0);
+  }
 
   // galeria items reveal
   gsap.to(".g-item", {
@@ -1012,6 +1187,32 @@ if (!prefersReducedMotion) {
   gsap.from(".resultados .dep-card", {
     opacity: 0, y: 30, duration: 0.8, stagger: 0.1,
     scrollTrigger: { trigger: ".resultados", start: "top 75%" }
+  });
+
+  // cabeçalhos de seção (eyebrow + título + parágrafo de cada bloco)
+  gsap.utils.toArray(".tecnicas-head, .galeria-head, .faq-head, .depoimentos-head").forEach((head) => {
+    gsap.from(head, {
+      opacity: 0, y: 24, duration: 0.8, ease: "power2.out",
+      scrollTrigger: { trigger: head, start: "top 85%" }
+    });
+  });
+
+  // depoimentos em vídeo
+  gsap.from(".video-dep-card", {
+    opacity: 0, y: 24, duration: 0.7, stagger: 0.12, ease: "power2.out",
+    scrollTrigger: { trigger: ".video-dep-grid", start: "top 80%" }
+  });
+
+  // itens do FAQ
+  gsap.from(".faq-item", {
+    opacity: 0, y: 20, duration: 0.6, stagger: 0.08, ease: "power2.out",
+    scrollTrigger: { trigger: ".faq", start: "top 80%" }
+  });
+
+  // bloco de contato
+  gsap.from(".contato .eyebrow, .contato h2, .contato .btn-whats", {
+    opacity: 0, y: 20, duration: 0.6, stagger: 0.1, ease: "power2.out",
+    scrollTrigger: { trigger: ".contato", start: "top 85%" }
   });
 
 } else {
@@ -1102,6 +1303,35 @@ navToggle.addEventListener("click", () => {
 });
 document.querySelectorAll("#navLinks a").forEach(a => a.addEventListener("click", closeNav));
 document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeNav(); });
+
+// cards de depoimento/resultado (foto em object-fit:contain) — preenche o
+// espaço vazio ao redor da foto com a própria imagem borrada, em vez de
+// deixar fundo liso sobrando quando a proporção da foto não bate com o card
+document.querySelectorAll(".dep-img-wrap").forEach(wrap => {
+  const img = wrap.querySelector("img");
+  if (!img) return;
+  const bg = document.createElement("img");
+  bg.className = "dep-img-bg";
+  bg.src = img.currentSrc || img.src;
+  bg.alt = "";
+  bg.setAttribute("aria-hidden", "true");
+  wrap.insertBefore(bg, wrap.firstChild);
+});
+
+// depoimentos em vídeo — play customizado no lugar dos controles nativos
+document.querySelectorAll(".video-dep-frame").forEach(frame => {
+  const video = frame.querySelector("video");
+  const playBtn = frame.querySelector(".video-play-btn");
+  playBtn.addEventListener("click", () => {
+    frame.classList.add("is-playing");
+    video.setAttribute("controls", "");
+    video.play();
+  });
+  video.addEventListener("ended", () => {
+    frame.classList.remove("is-playing");
+    video.removeAttribute("controls");
+  });
+});
 
 // FAQ accordion
 document.querySelectorAll(".faq-item").forEach(item => {

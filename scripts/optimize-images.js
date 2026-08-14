@@ -39,6 +39,7 @@ const QUALITY_STEPS = [82, 75, 68, 60, 52, 45, 38, 30];
 const CATEGORIES = [
   { test: /\bcapa\b/, label: "hero", maxKB: 200 },
   { test: /depoimento/, label: "depoimento", maxKB: 60 },
+  { test: /sala-atendimento/, label: "atendimento", maxKB: 150 }, // foto grande de fundo na seção scrollytelling
   { test: /.*/, label: "galeria", maxKB: 80 }, // fallback: técnicas, ambiente, antes/depois
 ];
 

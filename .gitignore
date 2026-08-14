@@ -1,3 +1,10 @@
 node_modules/
 .DS_Store
 Thumbs.db
+
+# vídeos brutos de origem (iPhone) — pesados demais pra versionar; só o
+# resultado processado por scripts/optimize-videos.js (assets-otimizadas/videos/)
+# entra no repositório
+assents/*.mov
+assents/*.mp4
+assents/*.m4v
