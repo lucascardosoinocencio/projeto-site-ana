@@ -2,6 +2,9 @@ node_modules/
 .DS_Store
 Thumbs.db
 
+# config/skills do Claude Code — tooling interno, não faz parte do site
+.claude/
+
 # vídeos brutos de origem (iPhone) — pesados demais pra versionar; só o
 # resultado processado por scripts/optimize-videos.js (assets-otimizadas/videos/)
 # entra no repositório
