@@ -11,3 +11,6 @@ Thumbs.db
 assents/*.mov
 assents/*.mp4
 assents/*.m4v
+
+# Local Netlify folder
+.netlify
