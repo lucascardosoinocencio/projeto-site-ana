@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Página não encontrada — Ana Julia Pires</title>
+<meta name="robots" content="noindex, follow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#232B1E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest: #232B1E;
+    --cream: #F5F0E4;
+    --sage-light: #C9D3BE;
+    --bronze: #B8863E;
+    --bronze-light: #D4A76A;
+    --ink-soft: #55584C;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    background:var(--forest);
+    color:var(--cream);
+    font-family:'Manrope',sans-serif;
+    display:flex; align-items:center; justify-content:center;
+    padding:8%;
+    text-align:center;
+  }
+  .wrap{max-width:520px;}
+  .code{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:400;
+    font-size:clamp(4rem,14vw,7rem); line-height:1; color:var(--bronze-light);
+  }
+  h1{
+    font-family:'Fraunces',serif; font-weight:400;
+    font-size:clamp(1.5rem,4vw,2.2rem); line-height:1.25;
+    margin-top:18px;
+  }
+  p{
+    color:var(--sage-light); font-size:1.05rem; line-height:1.6;
+    margin-top:16px;
+  }
+  .actions{
+    display:flex; flex-wrap:wrap; gap:16px;
+    justify-content:center;
+    margin-top:38px;
+  }
+  a.btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-height:48px;
+    padding:14px 30px; border-radius:100px;
+    font-weight:600; font-size:0.9rem; letter-spacing:0.02em;
+    text-decoration:none;
+    transition:transform 0.25s ease, background 0.25s ease;
+  }
+  a.btn-primary{background:var(--bronze); color:var(--forest);}
+  a.btn-primary:hover{background:var(--bronze-light); transform:translateY(-2px);}
+  a.btn-secondary{
+    color:var(--cream); border:1px solid rgba(245,240,228,0.3);
+  }
+  a.btn-secondary:hover{border-color:var(--bronze-light); color:var(--bronze-light);}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="code">404</div>
+    <h1>Essa página não existe — mas seu momento de cuidado sim.</h1>
+    <p>O endereço que você tentou acessar não foi encontrado. Volte para a página inicial ou chame a Ana Julia direto no WhatsApp para agendar.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/">Voltar ao início</a>
+      <a class="btn btn-secondary" href="https://wa.me/5514988321868?text=Ol%C3%A1%20Ana%20J%C3%BAlia%2C%20eu%20estava%20no%20site%20e%20queria%20saber%20mais%20sobre%20os%20tratamentos" target="_blank" rel="noopener noreferrer">Chamar no WhatsApp</a>
+    </div>
+  </div>
+</body>
+</html>
