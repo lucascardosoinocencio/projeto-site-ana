@@ -47,7 +47,7 @@ Site estático de página única (single page), sem framework e sem etapa de bui
 ## SEO, Analytics e LGPD
 
 - **Metadata/OG:** título, descrição, canonical, Open Graph, Twitter Card e JSON-LD (`HealthAndBeautyBusiness`) estão em `index.html`, todos apontando para `https://anajuterapeutamanual.netlify.app/`. Se o domínio mudar, atualize essas URLs, além de `robots.txt` e `sitemap.xml`.
-- **Google Analytics:** o código já está no `index.html`, mas com um ID placeholder (`GA_MEASUREMENT_ID = "G-XXXXXXXXXX"`, procure por esse trecho perto do fim do arquivo). Troque pelo ID real assim que a conta do GA4 for criada — o script só carrega depois que a pessoa aceita o banner de cookies.
+- **Google Analytics:** conta GA4 criada, ID de medição `G-7RM1QKJE3P` já configurado em `GA_MEASUREMENT_ID` no `index.html`. O script só carrega depois que a pessoa aceita o banner de cookies — pode levar até 48h para os primeiros dados aparecerem no painel do GA.
 - **Cookies/LGPD:** banner de consentimento na primeira visita, com opção de aceitar ou recusar cookies de analytics. A escolha fica salva no `localStorage` (`cookieConsent`); um link discreto "Gerenciar cookies" no canto inferior esquerdo reabre o banner a qualquer momento.
 
 ## Pipeline de imagens
