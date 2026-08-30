@@ -384,6 +384,19 @@
     .scroll-hint .line{animation:none; opacity:0.6;}
   }
 
+  /* celular deitado / janelas baixas — o bloco de texto do hero (com
+     justify-content:flex-end) não cabe em ~390px de altura e "estoura"
+     por cima, ficando embaixo da nav fixa (~100px de altura). Reserva
+     esse espaço no topo e encolhe o bloco pra caber. */
+  @media (max-height:500px){
+    .hero{padding:112px 8% 28px;}
+    .hero-eyebrow{margin-bottom:8px;}
+    .hero h1{font-size:clamp(1.4rem, 5.5vh, 2.4rem); line-height:1.15;}
+    .hero p.sub{margin-top:10px; font-size:0.92rem; line-height:1.4;}
+    .hero-cta{margin-top:16px; padding:12px 26px;}
+    .scroll-hint{display:none;}
+  }
+
   section{padding:160px 8%; position:relative;}
   @media (max-width:600px){
     section{padding:100px 6%;}
