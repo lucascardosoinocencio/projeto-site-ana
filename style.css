@@ -64,7 +64,9 @@ nav.nav-solid{
   color:var(--forest);
   box-shadow:0 1px 0 rgba(35,43,30,0.08);
 }
-nav.nav-solid .links a{color:var(--forest);}
+@media (min-width:901px){
+  nav.nav-solid .links a{color:var(--forest);}
+}
 nav.nav-solid .nav-toggle span,
 nav.nav-solid .nav-toggle span::before,
 nav.nav-solid .nav-toggle span::after{background:var(--forest);}

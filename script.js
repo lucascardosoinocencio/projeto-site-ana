@@ -236,15 +236,21 @@ navToggle.addEventListener("click", () => {
 document.querySelectorAll("#navLinks a").forEach(a => a.addEventListener("click", closeNav));
 document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeNav(); });
 
-// nav sólida fora do hero — evita que o título de qualquer seção "vaze"
-// visualmente por trás da logo (mix-blend-mode só faz sentido sobre a foto)
-const heroSection = document.querySelector(".hero");
-if (heroSection && "IntersectionObserver" in window) {
+// nav sólida fora do hero — evita que o texto do hero (ou de qualquer
+// seção) "vaze" visualmente por trás da logo (mix-blend-mode só faz
+// sentido sobre a foto). Como o texto do hero fica grudado embaixo
+// (justify-content:flex-end), ele sobe e cruza a faixa da nav bem antes
+// da seção inteira sair de tela — por isso observamos a PRIMEIRA linha
+// do texto (eyebrow), não a seção nem o bloco inteiro: assim que ela
+// se aproxima da nav, já troca pra sólida, com folga antes de qualquer
+// colisão real com a logo.
+const heroEyebrow = document.querySelector(".hero-eyebrow");
+if (heroEyebrow && "IntersectionObserver" in window) {
   const heroObserver = new IntersectionObserver(
     (entries) => entries.forEach(entry => siteNav.classList.toggle("nav-solid", !entry.isIntersecting)),
-    { threshold: 0 }
+    { threshold: 0, rootMargin: "-110px 0px 0px 0px" }
   );
-  heroObserver.observe(heroSection);
+  heroObserver.observe(heroEyebrow);
 } else {
   siteNav.classList.add("nav-solid");
 }
