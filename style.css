@@ -67,9 +67,13 @@ nav.nav-solid{
 @media (min-width:901px){
   nav.nav-solid .links a{color:var(--forest);}
 }
-nav.nav-solid .nav-toggle span,
-nav.nav-solid .nav-toggle span::before,
-nav.nav-solid .nav-toggle span::after{background:var(--forest);}
+/* :not(.open) é essencial aqui — com o menu mobile aberto, o botão fica
+   por cima do painel escuro (não da barra clara), então precisa
+   continuar claro mesmo com a nav "sólida" (senão o X de fechar some,
+   escuro sobre escuro) */
+nav.nav-solid:not(.open) .nav-toggle span,
+nav.nav-solid:not(.open) .nav-toggle span::before,
+nav.nav-solid:not(.open) .nav-toggle span::after{background:var(--forest);}
 nav .logo{font-family:'Fraunces',serif; font-size:1.1rem; letter-spacing:0.02em; white-space:nowrap;}
 nav .links{display:flex; gap:32px; font-size:0.88rem; letter-spacing:0.08em; text-transform:uppercase;}
 nav .links a{color:var(--cream); text-decoration:none; opacity:0.85; display:inline-flex; align-items:center; min-height:44px;}

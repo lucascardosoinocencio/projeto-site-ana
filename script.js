@@ -220,15 +220,30 @@ createCarousel("resTrack", "resNav", "Ir para resultado");
 // menu mobile
 const siteNav = document.getElementById("siteNav");
 const navToggle = document.getElementById("navToggle");
+// trava o scroll da página com o menu aberto — sem isso dava pra rolar
+// por trás do painel, o que já causou mais de um bug visual na nav
+// (position:fixed + mix-blend-mode reagindo ao scroll enquanto o menu
+// está aberto). Guarda a posição pra restaurar exatamente ao fechar.
+let navScrollLockY = 0;
 function closeNav(){
   siteNav.classList.remove("open");
   navToggle.setAttribute("aria-expanded", "false");
   navToggle.setAttribute("aria-label", "Abrir menu");
+  document.body.style.position = "";
+  document.body.style.top = "";
+  document.body.style.left = "";
+  document.body.style.right = "";
+  window.scrollTo(0, navScrollLockY);
 }
 function openNav(){
   siteNav.classList.add("open");
   navToggle.setAttribute("aria-expanded", "true");
   navToggle.setAttribute("aria-label", "Fechar menu");
+  navScrollLockY = window.scrollY;
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${navScrollLockY}px`;
+  document.body.style.left = "0";
+  document.body.style.right = "0";
 }
 navToggle.addEventListener("click", () => {
   siteNav.classList.contains("open") ? closeNav() : openNav();
