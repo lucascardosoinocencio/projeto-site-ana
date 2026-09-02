@@ -590,8 +590,8 @@ footer{
   transition:opacity 0.25s ease, color 0.25s ease;
 }
 .footer-credit:hover{opacity:1; color:var(--bronze-light);}
-.footer-credit-brand{ display:inline-flex; align-items:center; gap:5px; font-weight:700; letter-spacing:0.03em; }
-.footer-credit-brand img{ height:18px; width:auto; flex-shrink:0; }
+.footer-credit-brand{ display:inline-flex; align-items:center; gap:5px; font-size:0.95rem; font-weight:800; letter-spacing:0.03em; }
+.footer-credit-brand img{ height:22px; width:auto; flex-shrink:0; }
 .lucaslabs-lucas{ color:#B9C0CA; }
 .lucaslabs-labs{ color:#3FA9E8; }
 
