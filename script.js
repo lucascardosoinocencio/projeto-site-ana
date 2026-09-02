@@ -233,7 +233,17 @@ function closeNav(){
   document.body.style.top = "";
   document.body.style.left = "";
   document.body.style.right = "";
+  // restaura a posição sem animação — como o body ficou fixed, o
+  // scroll "real" da página nem se moveu, então isso é só destravar o
+  // valor de volta. Se deixasse o scroll-behavior:smooth do html agir
+  // aqui, essa rolagem concorria com a rolagem até a seção clicada no
+  // link do menu, e às vezes "ganhava" a animação errada, sobrando no
+  // lugar errado da página.
+  const html = document.documentElement;
+  const prevBehavior = html.style.scrollBehavior;
+  html.style.scrollBehavior = "auto";
   window.scrollTo(0, navScrollLockY);
+  html.style.scrollBehavior = prevBehavior;
 }
 function openNav(){
   siteNav.classList.add("open");
@@ -248,7 +258,18 @@ function openNav(){
 navToggle.addEventListener("click", () => {
   siteNav.classList.contains("open") ? closeNav() : openNav();
 });
-document.querySelectorAll("#navLinks a").forEach(a => a.addEventListener("click", closeNav));
+document.querySelectorAll("#navLinks a").forEach(a => {
+  a.addEventListener("click", (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute("href"));
+    closeNav();
+    // espera o body voltar ao fluxo normal do documento (um frame já
+    // basta) antes de calcular a posição da seção — fazer isso antes
+    // do restore acima mediria a página ainda "congelada" pelo scroll
+    // lock e podia mirar num ponto errado.
+    requestAnimationFrame(() => target?.scrollIntoView({ behavior: "smooth" }));
+  });
+});
 document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeNav(); });
 
 // nav sólida fora do hero — evita que o texto do hero (ou de qualquer
