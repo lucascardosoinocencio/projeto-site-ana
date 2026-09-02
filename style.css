@@ -285,7 +285,7 @@ nav.open .nav-toggle span::after{transform:translateY(-7px) rotate(-45deg);}
   display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end;
   color:var(--cream);
   text-align:left;
-  padding:0 8% 100px;
+  padding:0 8% clamp(32px, 10vh, 100px);
   overflow:hidden;
 }
 .hero-photo{
@@ -303,11 +303,15 @@ nav.open .nav-toggle span::after{transform:translateY(-7px) rotate(-45deg);}
 .hero-eyebrow{
   position:relative; z-index:2;
   font-size:0.86rem; letter-spacing:0.25em; text-transform:uppercase;
-  color:var(--sage-light); margin-bottom:22px; opacity:0.9;
+  color:var(--sage-light); margin-bottom:clamp(8px, 3vh, 22px); opacity:0.9;
 }
 .hero h1{
   position:relative; z-index:2;
-  font-size:clamp(2.4rem, 6vw, 4.6rem);
+  /* min() com vh garante que numa janela larga PORÉM baixa (comum em
+     desktop com a janela do navegador pequena) o título encolha pela
+     altura disponível, não só pela largura — senão ele sempre renderiza
+     no tamanho máximo e estoura por cima da nav. */
+  font-size:clamp(1.6rem, min(6vw, 7.5vh), 4.6rem);
   font-weight:400;
   line-height:1.08;
   max-width:16ch;
@@ -315,12 +319,12 @@ nav.open .nav-toggle span::after{transform:translateY(-7px) rotate(-45deg);}
 .hero h1 .accent{color:var(--bronze-light); font-style:italic; font-weight:400;}
 .hero p.sub{
   position:relative; z-index:2;
-  margin-top:24px; font-size:1.1rem; color:var(--sage-light); max-width:38ch; line-height:1.6;
+  margin-top:clamp(10px, 3vh, 24px); font-size:1.1rem; color:var(--sage-light); max-width:38ch; line-height:1.6;
 }
 .hero-cta{
   position:relative; z-index:2;
   display:inline-flex; align-items:center; gap:10px;
-  margin-top:38px;
+  margin-top:clamp(16px, 5vh, 38px);
   background:var(--bronze); color:var(--forest);
   padding:16px 34px; border-radius:100px;
   font-weight:600; font-size:0.88rem; letter-spacing:0.03em; text-transform:uppercase;
