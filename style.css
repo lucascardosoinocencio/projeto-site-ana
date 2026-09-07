@@ -74,7 +74,7 @@ nav.nav-solid{
 nav.nav-solid:not(.open) .nav-toggle span,
 nav.nav-solid:not(.open) .nav-toggle span::before,
 nav.nav-solid:not(.open) .nav-toggle span::after{background:var(--forest);}
-nav .logo{font-family:'Fraunces',serif; font-size:1.1rem; letter-spacing:0.02em; white-space:nowrap;}
+nav .logo{font-family:'Fraunces',serif; font-size:1.1rem; letter-spacing:0.02em; white-space:nowrap; color:inherit; text-decoration:none;}
 nav .links{display:flex; gap:32px; font-size:0.88rem; letter-spacing:0.08em; text-transform:uppercase;}
 nav .links a{color:var(--cream); text-decoration:none; opacity:0.85; display:inline-flex; align-items:center; min-height:44px;}
 nav .nav-toggle{
@@ -609,6 +609,8 @@ footer{
 .cookie-banner.is-visible{transform:translateY(0);}
 .cookie-banner[hidden]{display:none;}
 .cookie-text{flex:1 1 420px; font-size:0.92rem; line-height:1.55; color:var(--sage-light); max-width:640px;}
+.cookie-text a{color:var(--bronze-light);}
+.cookie-text a:hover{color:var(--cream);}
 .cookie-text strong{color:var(--cream); font-weight:600;}
 .cookie-actions{display:flex; flex-wrap:wrap; gap:12px; align-items:center;}
 .cookie-btn{
