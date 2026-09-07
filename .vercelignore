@@ -1,0 +1,19 @@
+node_modules/
+.netlify/
+.git/
+.claude/
+scripts/
+
+# vídeos brutos de origem (iPhone) — pesados demais (>100MB cada,
+# passam do limite por arquivo da Vercel) e não usados no site direto;
+# só a versão processada por scripts/optimize-videos.js entra no
+# deploy (assets-otimizadas/videos/). NÃO ignora a pasta assents/
+# inteira: logo-hex.png é usado direto no rodapé, e excluir a pasta
+# toda quebra esse arquivo (negação com "!" não resgata arquivo dentro
+# de diretório já ignorado).
+assents/*.mov
+assents/*.MOV
+assents/*.mp4
+assents/*.MP4
+assents/*.m4v
+assents/*.M4V

@@ -12,5 +12,8 @@ assents/*.mov
 assents/*.mp4
 assents/*.m4v
 
-# Local Netlify folder
+# Local Netlify folder (legado — projeto migrou pra Vercel)
 .netlify
+
+# Local Vercel folder
+.vercel

@@ -2,7 +2,7 @@
 
 Landing page institucional para a massoterapeuta Ana Julia Pires, com foco em conversão via WhatsApp e apresentação de técnicas com ênfase em cuidado para lipedema.
 
-**🔗 Site:** https://anajuterapeutamanual.netlify.app/
+**🔗 Site:** https://anajuterapeutamanual.vercel.app/
 
 ## Sobre o projeto
 
@@ -31,7 +31,7 @@ Site estático de página única (single page), sem framework e sem etapa de bui
 ```
 .
 ├── index.html                  # Página única do site
-├── 404.html                    # Página de erro (servida automaticamente pelo Netlify)
+├── 404.html                    # Página de erro (servida automaticamente pela Vercel)
 ├── robots.txt
 ├── sitemap.xml
 ├── favicon.svg
@@ -46,7 +46,7 @@ Site estático de página única (single page), sem framework e sem etapa de bui
 
 ## SEO, Analytics e LGPD
 
-- **Metadata/OG:** título, descrição, canonical, Open Graph, Twitter Card e JSON-LD (`HealthAndBeautyBusiness`) estão em `index.html`, todos apontando para `https://anajuterapeutamanual.netlify.app/`. Se o domínio mudar, atualize essas URLs, além de `robots.txt` e `sitemap.xml`.
+- **Metadata/OG:** título, descrição, canonical, Open Graph, Twitter Card e JSON-LD (`HealthAndBeautyBusiness`) estão em `index.html`, todos apontando para `https://anajuterapeutamanual.vercel.app/`. Se o domínio mudar, atualize essas URLs, além de `robots.txt` e `sitemap.xml`.
 - **Google Analytics:** conta GA4 criada, ID de medição `G-7RM1QKJE3P` já configurado em `GA_MEASUREMENT_ID` no `index.html`. O script só carrega depois que a pessoa aceita o banner de cookies — pode levar até 48h para os primeiros dados aparecerem no painel do GA.
 - **Cookies/LGPD:** banner de consentimento na primeira visita, com opção de aceitar ou recusar cookies de analytics. A escolha fica salva no `localStorage` (`cookieConsent`); um link discreto "Gerenciar cookies" no canto inferior esquerdo reabre o banner a qualquer momento.
 
