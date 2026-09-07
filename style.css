@@ -581,6 +581,15 @@ footer{
   transition:border-color 0.25s ease, color 0.25s ease;
 }
 .footer-instagram:hover{border-color:var(--bronze-light); color:var(--bronze-light);}
+.footer-privacy{
+  color:var(--sage-light);
+  text-decoration:none;
+  font-size:0.82rem; letter-spacing:0.03em;
+  opacity:0.85;
+  min-height:44px; display:inline-flex; align-items:center; padding:4px 6px;
+  transition:opacity 0.25s ease, color 0.25s ease;
+}
+.footer-privacy:hover{opacity:1; color:var(--bronze-light);}
 .footer-credit{
   display:inline-flex; align-items:center; gap:6px;
   color:var(--sage-light); opacity:0.75;
